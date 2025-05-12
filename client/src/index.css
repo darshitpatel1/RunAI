@@ -1,9 +1,12 @@
+/* Tailwind layers */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ----------------------  BASE DESIGN TOKENS  ---------------------- */
 @layer base {
   :root {
+    /* ── light theme variables ──────────────────────────────────── */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -35,6 +38,7 @@
     --radius: 1rem;
   }
 
+  /* ── dark theme overrides ─────────────────────────────────────── */
   .dark {
     --background: 0 0% 0%;
     --foreground: 210 40% 98%;
@@ -65,40 +69,43 @@
     --ring: 212.7 26.8% 83.9%;
   }
 
+  /* global element resets ---------------------------------------- */
   * {
-    @apply border;
+    @apply border-border;
   }
-  
+
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
-  
-  /* Custom styles for React Flow */
+
+  /* React-Flow & misc animations ---------------------------------- */
   .react-flow__edge-path {
     stroke-dasharray: 5 5;
     animation: dash 30s linear infinite;
   }
-  
+
   .node {
     transition: box-shadow 0.3s ease, transform 0.2s ease;
   }
-  
-  .node:hover {
-    transform: translateY(-2px);
-  }
-  
-  .node-highlight {
-    animation: node-pulse 2s infinite;
-  }
-  
+  .node:hover       { transform: translateY(-2px); }
+  .node-highlight   { animation: node-pulse 2s infinite; }
+
   @keyframes dash {
-    to {
-      stroke-dashoffset: -1000;
-    }
+    to { stroke-dashoffset: -1000; }
   }
-  
   @keyframes node-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); }
-    50% { box-shadow: 0 0 0 8px rgba(79, 70, 229, 0); }
+    0%,100% { box-shadow: 0 0 0 0 rgba(79,70,229,0.4); }
+    50%     { box-shadow: 0 0 0 8px rgba(79,70,229,0); }
   }
+}
+
+/* ----------------------  TOKEN UTILITIES  ------------------------ */
+@layer utilities {
+  /* border / background / text helpers using design tokens */
+  .border-border          { @apply border; border-color: hsl(var(--border)); }
+
+  .bg-background          { background-color: hsl(var(--background)); }
+  .bg-primary             { background-color: hsl(var(--primary)); }
+
+  .text-muted-foreground  { color: hsl(var(--muted-foreground)); }
 }
