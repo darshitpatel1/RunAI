@@ -101,11 +101,12 @@
 
 /* ----------------------  TOKEN UTILITIES  ------------------------ */
 @layer utilities {
-  /* border / background / text helpers using design tokens */
   .border-border          { @apply border; border-color: hsl(var(--border)); }
-
   .bg-background          { background-color: hsl(var(--background)); }
   .bg-primary             { background-color: hsl(var(--primary)); }
+
+  /* ➜ add this line */
+  .text-foreground        { color: hsl(var(--foreground)); }
 
   .text-muted-foreground  { color: hsl(var(--muted-foreground)); }
 }
